@@ -1,0 +1,9 @@
+name: pcl_env
+channels:
+  - ccordoba12
+dependencies:
+  - python=2.7   # or 3.6?
+  - matplotlib
+  - pcl
+  - python-pcl
+  - nb_conda

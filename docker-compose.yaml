@@ -1,0 +1,19 @@
+version: '3'
+services:
+  pcl-potree-notebook:
+#    volumes:
+#      - ~/Work/CGM/pc_conversion:/home/joyvan/work
+    ports:
+      - "8080:80"
+      - "8888:8888"
+#    user: root
+    hostname: notebook
+    env_file:
+      .env
+    image:
+      mmatiaschek/pcl-potree-jupyter-notebook:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        buildno: 1
