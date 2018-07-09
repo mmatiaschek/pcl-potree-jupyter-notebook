@@ -1,8 +1,6 @@
-FROM jupyter/minimal-notebook:latest
-# https://github.com/jupyter/docker-stacks/blob/master/minimal-notebook/Dockerfile
-# https://github.com/jupyter/docker-stacks/blob/master/base-notebook/Dockerfile
+FROM jupyter/base-notebook:27ba57364579
 
-# https://fmgdata.kinja.com/using-docker-with-conda-environments-1790901398
+# https://zero-to-jupyterhub.readthedocs.io/en/latest/user-environment.html#use-jupyterlab-by-default
 
 MAINTAINER Markus Matiaschek <mmatiaschek@gmail.com>
 WORKDIR /home/joyvan
@@ -54,11 +52,6 @@ RUN cd /opt/potree/dev/workspaces/PotreeConverter/master/build/PotreeConverter &
 
 RUN chown -R $NB_USER: /opt/potree
 
-#RUN [ "service", "apache2", "start" ] 
-#RUN [ "update-rc.d", "apache2", "enable" ] 
-#RUN [ "apachectl", "-D", "BACKGROUND" ]
-# ADD /usr/share/apache2/default-site/index.html
-
 RUN mkdir -p /home/joyvan/work/html
 RUN cp -a /opt/potree/dev/workspaces/PotreeConverter/master/build/PotreeConverter/resources/page_template/ /home/joyvan/work/html/demo
 RUN ln -s /home/joyvan/work/html/ /var/www/html/potree
@@ -80,12 +73,10 @@ ADD work/demo.pcd /home/joyvan/work/demo.pcd
 
 RUN [ "conda", "env", "create" ]
 
-
-
-#RUN [ "pip", "install", "gsutil" ]
-#pip install --upgrade google-api-python-client
-
-#pip install jgscm https://github.com/src-d/jgscm
+# TODO environment.yml?
+ARG JUPYTERLAB_VERSION=0.31.12
+RUN     pip install jupyterlab==$JUPYTERLAB_VERSION \
+    &&  jupyter labextension install @jupyterlab/hub-extension
 
 
 VOLUME ["/home/jovyan/work/"]

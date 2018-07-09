@@ -2,8 +2,14 @@ name: pcl_env
 channels:
   - ccordoba12
 dependencies:
-  - python=2.7   # or 3.6?
+  - python=3.6
   - matplotlib
   - pcl
   - python-pcl
   - nb_conda
+  - nb_conda_kernels
+  - keras
+  - tensorflow
+  - pillow
+  - glob2
+  - progressbar2
